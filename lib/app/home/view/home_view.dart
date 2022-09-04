@@ -11,7 +11,7 @@ class  HomeView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
           Text(
-            "HomeView View ",
+            "HomeView View   ",
             style: TextStyle(fontSize: 20),
           ),
         ],
