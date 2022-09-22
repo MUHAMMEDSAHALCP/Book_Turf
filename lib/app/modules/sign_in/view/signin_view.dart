@@ -42,7 +42,7 @@ class SignInView extends StatelessWidget {
                   height50,
                   height50,
                   TextFormField(
-                    controller: signInViewModel.nameController,
+                    controller: signInViewModel.emailController,
                     decoration: const InputDecoration(
                       label: Text("Email", style: textFormTextStyle),
                     ),
