@@ -32,6 +32,7 @@ class TurfContainer extends StatelessWidget {
             ),
             Text(
               turfName,
+              textAlign: TextAlign.center,
               style: textStyle.copyWith(fontSize: 16),
             ),
             height5,
