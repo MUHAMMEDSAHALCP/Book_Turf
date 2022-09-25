@@ -5,8 +5,7 @@ import 'package:flutter/cupertino.dart';
 class HomeViewModel extends ChangeNotifier {
   String _type = "7's";
   bool isClicked = false;
-
-  List turfDetails = [];
+  List<Datum> turfDetails = [];
   get type => _type;
 
   setSatate(value) {
@@ -15,7 +14,8 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   getTurfDetails() async {
-    HomeTurfModel homeTurfModel = await HomeApiService().getTurfdata();
+    HomeTurfModel? homeTurfModel = await HomeApiService().getTurfdata();
+    // turfDetails.addAll(homeTurfModel!.data);
     notifyListeners();
   }
 }

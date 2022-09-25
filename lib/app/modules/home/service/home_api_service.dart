@@ -5,7 +5,7 @@ import 'package:book_turf/app/utilities/dio_service.dart';
 import 'package:dio/dio.dart';
 
 class HomeApiService {
-  getTurfdata() async {
+  Future<HomeTurfModel?> getTurfdata() async {
     try {
       Response response = await DioService.getMethod();
       if (response.statusCode == 200) {
@@ -16,5 +16,6 @@ class HomeApiService {
     } catch (e) {
       log("Home api error meassage: $e");
     }
+    return null;
   }
 }

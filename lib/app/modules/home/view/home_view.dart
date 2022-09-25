@@ -1,6 +1,7 @@
 import 'package:book_turf/app/components/choice_chip.dart';
 import 'package:book_turf/app/components/turf_container.dart';
 import 'package:book_turf/app/modules/home/view_model/home_view_model.dart';
+import 'package:book_turf/app/modules/home/widget/static_card.dart';
 import 'package:book_turf/app/modules/spot/view/spot_view.dart';
 import 'package:book_turf/app/utilities/colors.dart';
 import 'package:book_turf/app/utilities/styles.dart';
@@ -54,57 +55,7 @@ class HomeView extends StatelessWidget {
                     ),
                   ),
                   height20,
-                  Container(
-                    height: size.height * .18,
-                    decoration: boxDecoration,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15, top: 12),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Hi, Muhammed...",
-                                style: textStyle.copyWith(
-                                  color: whiteColor,
-                                ),
-                              ),
-                              height10,
-                              Text(
-                                "Explore vanues and \n book your favourite spot.",
-                                style: textStyle.copyWith(fontSize: 13),
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.arrow_forward,
-                                  color: whiteColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 10),
-                          child: Container(
-                            height: size.height * .3,
-                            width: size.width / 4,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              image: const DecorationImage(
-                                  image: AssetImage(
-                                    "assets/images/boyfootball.png",
-                                  ),
-                                  fit: BoxFit.fill),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  StaticCard(size: size),
                   height20,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -193,7 +144,7 @@ class HomeView extends StatelessWidget {
                   builder: (context, value, child) {
                     return GridView.builder(
                       physics: const BouncingScrollPhysics(),
-                      itemCount: value.homeTurfModel!.data!.length,
+                      itemCount: 6,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisSpacing: 20,
@@ -202,6 +153,10 @@ class HomeView extends StatelessWidget {
                             (MediaQuery.of(context).size.height / 1.2),
                       ),
                       itemBuilder: (context, index) {
+                        return const TurfContainer(
+                          turfName: "Jawans Arena",
+                          visible: false,
+                        );
                       },
                     );
                   },
