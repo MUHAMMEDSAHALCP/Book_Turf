@@ -1,12 +1,12 @@
 import 'dart:developer';
 import 'package:book_turf/app/modules/sign_up/model/signup_model.dart';
-import 'package:book_turf/app/services/dio_service.dart';
-import 'package:book_turf/app/services/url.dart';
+import 'package:book_turf/app/utilities/core/dio_service.dart';
+import 'package:book_turf/app/utilities/core/url.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 class SignupApiService extends ChangeNotifier {
-  signupApi(SignUpModel data) async {
+ Future<SignUpResponse?> signupApi(SignUpModel data) async {
     try {
       Response response = await DioService.postMethod(
           url: Url.baseUrl + Url.signup, value: data.toJson());
@@ -25,5 +25,6 @@ class SignupApiService extends ChangeNotifier {
     } catch (e) {
       log("SignUp error message: $e");
     }
+    return null;
   }
 }
