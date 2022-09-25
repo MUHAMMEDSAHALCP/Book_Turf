@@ -8,8 +8,8 @@ import 'package:provider/provider.dart';
 
 class SignInView extends StatelessWidget {
   static String id = "signin_page";
-  const SignInView({Key? key}) : super(key: key);
-
+  SignInView({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -22,58 +22,75 @@ class SignInView extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: 20, vertical: size.height / 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "sign in",
-                    style: textStyle.copyWith(
-                      fontSize: 30,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "sign in",
+                      style: textStyle.copyWith(
+                        fontSize: 30,
+                      ),
                     ),
-                  ),
-                  height5,
-                  Text(
-                    "Please sign in to continue...",
-                    style: textStyle.copyWith(
-                      fontSize: 15,
-                      color: greyColor,
+                    height5,
+                    Text(
+                      "Please sign in to continue...",
+                      style: textStyle.copyWith(
+                        fontSize: 15,
+                        color: greyColor,
+                      ),
                     ),
-                  ),
-                  height50,
-                  height50,
-                  TextFormField(
-                    controller: signInViewModel.emailController,
-                    decoration: const InputDecoration(
-                      label: Text("Email", style: textFormTextStyle),
+                    height50,
+                    height50,
+                    TextFormField(
+                      controller: signInViewModel.emailController,
+                      decoration: const InputDecoration(
+                        label: Text("Email", style: textFormTextStyle),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter email';
+                        }
+                        return null;
+                      },
                     ),
-                  ),
-                  TextFormField(
-                    controller: signInViewModel.passwordController,
-                    decoration: const InputDecoration(
-                      label: Text("Password", style: textFormTextStyle),
+                    TextFormField(
+                      controller: signInViewModel.passwordController,
+                      decoration: const InputDecoration(
+                        label: Text("Password", style: textFormTextStyle),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter password';
+                        }
+                        return null;
+                      },
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Forgot Password?",
-                        style: textFormTextStyle.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: blackColor,
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Forgot Password?",
+                          style: textFormTextStyle.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: blackColor,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             const SizedBox(),
             SignInContainer(
               buttonText: 'Sign in',
               buttonOnClick: () {
-                signInViewModel.signIn(context);
+                if (_formKey.currentState!.validate()) {
+                  signInViewModel.signIn(context);
+                }
               },
               googleButtonText: 'Continue with google',
               googleButtonOnClick: () {},

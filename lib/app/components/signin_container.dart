@@ -26,7 +26,7 @@ class SignInContainer extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       width: double.infinity,
-      height: size.height / 3.1,
+      height: size.height * 0.37,
       decoration: const BoxDecoration(
         color: primaryColor,
         borderRadius: BorderRadius.only(
@@ -34,67 +34,64 @@ class SignInContainer extends StatelessWidget {
           topRight: Radius.circular(30),
         ),
       ),
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: MaterialButtonWidget(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+        child: Stack(
+          children: [
+            MaterialButtonWidget(
               color: secondaryColor,
               text: buttonText,
               textColor: whiteColor,
               onClick: buttonOnClick,
             ),
-          ),
-          Positioned(
-            top: 0,
-            right: 0,
-            bottom: 30,
-            left: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Already have an account?"),
-                TextButton(
-                  onPressed: signUpSignInOnClick,
-                  child: Text(
-                    signUpSignInText,
-                    style: textFormTextStyle.copyWith(
-                      color: whiteColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 30),
+            Positioned(
+              top: 0,
+              right: 0,
+              bottom: 60,
+              left: 0,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    height: 1,
-                    width: size.width / 2.6,
-                    color: greyColor,
-                  ),
-                  width10,
-                  const Text("OR"),
-                  width10,
-                  Container(
-                    height: 1,
-                    width: size.width / 2.6,
-                    color: greyColor,
+                  const Text("Already have an account?"),
+                  TextButton(
+                    onPressed: signUpSignInOnClick,
+                    child: Text(
+                      signUpSignInText,
+                      style: textFormTextStyle.copyWith(
+                        color: whiteColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 1,
+                      width: size.width / 2.8,
+                      color: greyColor,
+                    ),
+                    width10,
+                    const Text("OR"),
+                    width10,
+                    Container(
+                      height: 1,
+                      width: size.width / 2.8,
+                      color: greyColor,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
               child: Stack(
                 children: [
                   MaterialButtonWidget(
@@ -115,8 +112,8 @@ class SignInContainer extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
