@@ -1,7 +1,6 @@
+import 'package:book_turf/app/providers/provider.dart';
 import 'package:book_turf/app/routes/routes.dart';
 import 'package:flutter/material.dart';
-
-import 'app/provider/provider.dart';
 
 void main() {
   runApp(

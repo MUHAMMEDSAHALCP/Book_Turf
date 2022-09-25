@@ -5,9 +5,8 @@ import 'package:book_turf/app/modules/sign_in/view_model/signin_view_model.dart'
 import 'package:book_turf/app/modules/sign_up/service/services/signup_api_service.dart';
 import 'package:book_turf/app/modules/sign_up/view_model/signup_view_model.dart';
 import 'package:book_turf/main.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'package:flutter/cupertino.dart';
 
 class Providers {
   static Widget provider() {
