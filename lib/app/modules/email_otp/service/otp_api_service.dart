@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:book_turf/app/modules/email_otp/model/otp_verification_model.dart';
-import 'package:book_turf/app/utilities/core/dio_service.dart';
-import 'package:book_turf/app/utilities/core/url.dart';
+import 'package:book_turf/app/utilities/dio_service.dart';
+import 'package:book_turf/app/utilities/url.dart';
 import 'package:dio/dio.dart';
 
 class EmailOtpApi {

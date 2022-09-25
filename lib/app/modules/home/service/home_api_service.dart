@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:book_turf/app/modules/home/model/home_model.dart';
-import 'package:book_turf/app/utilities/core/dio_service.dart';
+import 'package:book_turf/app/utilities/dio_service.dart';
 import 'package:dio/dio.dart';
 
 class HomeApiService {
