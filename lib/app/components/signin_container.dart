@@ -36,7 +36,7 @@ class SignInContainer extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-        child: Stack(
+        child: Column(
           children: [
             MaterialButtonWidget(
               color: secondaryColor,
@@ -44,73 +44,62 @@ class SignInContainer extends StatelessWidget {
               textColor: whiteColor,
               onClick: buttonOnClick,
             ),
-            Positioned(
-              top: 0,
-              right: 0,
-              bottom: 60,
-              left: 0,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Already have an account?"),
+                TextButton(
+                  onPressed: signUpSignInOnClick,
+                  child: Text(
+                    signUpSignInText,
+                    style: textFormTextStyle.copyWith(
+                      color: whiteColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20, bottom: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Already have an account?"),
-                  TextButton(
-                    onPressed: signUpSignInOnClick,
-                    child: Text(
-                      signUpSignInText,
-                      style: textFormTextStyle.copyWith(
-                        color: whiteColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                  Container(
+                    height: 1,
+                    width: size.width / 2.8,
+                    color: greyColor,
+                  ),
+                  width10,
+                  const Text("OR"),
+                  width10,
+                  Container(
+                    height: 1,
+                    width: size.width / 2.8,
+                    color: greyColor,
                   ),
                 ],
               ),
             ),
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 30),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 1,
-                      width: size.width / 2.8,
-                      color: greyColor,
-                    ),
-                    width10,
-                    const Text("OR"),
-                    width10,
-                    Container(
-                      height: 1,
-                      width: size.width / 2.8,
-                      color: greyColor,
-                    ),
-                  ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                CircleAvatar(
+                  backgroundColor: whiteColor,
+                  radius: 20,
+                  backgroundImage: AssetImage("assets/images/google.png"),
                 ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Stack(
-                children: [
-                  MaterialButtonWidget(
-                    color: whiteColor,
-                    text: googleButtonText,
-                    textColor: blackColor,
-                    onClick: googleButtonOnClick,
-                  ),
-                  const Positioned(
-                    top: 4,
-                    left: 4,
-                    child: CircleAvatar(
-                      backgroundColor: whiteColor,
-                      radius: 20,
-                      backgroundImage: AssetImage("assets/images/google.webp"),
+                width10,
+                CircleAvatar(
+                  child: CircleAvatar(
+                    backgroundColor: whiteColor,
+                    radius: 17,
+                    backgroundImage: AssetImage(
+                      "assets/images/phone.jpg",
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),
