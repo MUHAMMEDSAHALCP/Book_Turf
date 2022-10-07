@@ -26,34 +26,37 @@ class StaticCard extends StatelessWidget {
                 Text(
                   "Hi, Muhammed...",
                   style: textStyle.copyWith(
-                    color: whiteColor,
+                    color: secondaryColor,
                   ),
                 ),
                 height10,
                 Text(
-                  "Explore vanues and \n book your favourite spot.",
-                  style: textStyle.copyWith(fontSize: 13),
+                  "Explore vanues and\nbook your favourite spot.",
+                  style: textStyle.copyWith(
+                    fontSize: 13,
+                    color: greyColor.shade300,
+                  ),
                 ),
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(
                     Icons.arrow_forward,
-                    color: whiteColor,
+                    color: secondaryColor,
                   ),
                 ),
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
             child: Container(
-              height: size.height * .3,
+              height: size.height / 1,
               width: size.width / 4,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
                 image: const DecorationImage(
                     image: AssetImage(
-                      "assets/images/boyfootball.png",
+                      "assets/images/messi.png",
                     ),
                     fit: BoxFit.fill),
               ),

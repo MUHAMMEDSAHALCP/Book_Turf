@@ -1,8 +1,10 @@
 import 'package:book_turf/app/components/choice_chip.dart';
 import 'package:book_turf/app/components/turf_container.dart';
+import 'package:book_turf/app/modules/bottom_navigation/view/bottom_nav_bar.dart';
+import 'package:book_turf/app/modules/details/view/details_view.dart';
+import 'package:book_turf/app/modules/home/service/location_api.dart';
 import 'package:book_turf/app/modules/home/view_model/home_view_model.dart';
 import 'package:book_turf/app/modules/home/widget/static_card.dart';
-import 'package:book_turf/app/modules/spot/view/spot_view.dart';
 import 'package:book_turf/app/utilities/colors.dart';
 import 'package:book_turf/app/utilities/styles.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,7 +17,12 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeProvider = context.watch<HomeViewModel>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<HomeViewModel>(context, listen: false)
+          .getTurfDetails(context);
+    });
+    HomeViewModel homeProvider = context.watch<HomeViewModel>();
+    GetUserLoction getUserLoction = context.watch<GetUserLoction>();
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -25,18 +32,24 @@ class HomeView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    getUserLoction.getUserLocation();
+                  },
                   icon: const Icon(
                     Icons.location_on,
                     color: blackColor,
                   ),
-                  label: Text(
-                    "Thottummal, Thalassery...",
-                    style: textStyle.copyWith(
-                      color: blackColor,
-                      fontSize: 15,
-                    ),
-                  ),
+                  label: getUserLoction.userDetails == null
+                      ? const Text(
+                          "select current location",
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      : Text(
+                          getUserLoction.userDetails.toString(),
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: false,
+                          style: const TextStyle(color: Colors.black),
+                        ),
                 ),
                 IconButton(
                   onPressed: () {},
@@ -66,7 +79,7 @@ class HomeView extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, SpotView.id);
+                          Navigator.pushNamed(context, BottomNavView.id);
                         },
                         child: Text(
                           "view All",
@@ -86,7 +99,7 @@ class HomeView extends StatelessWidget {
                       children: [
                         ChoiceChipWidget(
                           onClick: (bool value) {
-                            homeProvider.setSatate("5's");
+                            homeProvider.setState("5's");
                           },
                           selected: homeProvider.type == "5's" ? true : false,
                           text: "5's",
@@ -95,7 +108,7 @@ class HomeView extends StatelessWidget {
                         ),
                         ChoiceChipWidget(
                           onClick: (bool value) {
-                            homeProvider.setSatate("6's");
+                            homeProvider.setState("6's");
                           },
                           selected: homeProvider.type == "6's" ? true : false,
                           text: "6's",
@@ -104,7 +117,7 @@ class HomeView extends StatelessWidget {
                         ),
                         ChoiceChipWidget(
                           onClick: (bool value) {
-                            homeProvider.setSatate("7's");
+                            homeProvider.setState("7's");
                           },
                           selected: homeProvider.type == "7's" ? true : false,
                           text: "7's",
@@ -113,7 +126,7 @@ class HomeView extends StatelessWidget {
                         ),
                         ChoiceChipWidget(
                           onClick: (bool value) {
-                            homeProvider.setSatate("9's");
+                            homeProvider.setState("9's");
                           },
                           selected: homeProvider.type == "9's" ? true : false,
                           text: "9's",
@@ -122,7 +135,7 @@ class HomeView extends StatelessWidget {
                         ),
                         ChoiceChipWidget(
                           onClick: (bool value) {
-                            homeProvider.setSatate("11's");
+                            homeProvider.setState("11's");
                           },
                           selected: homeProvider.type == "11's" ? true : false,
                           text: "11's",
@@ -144,7 +157,7 @@ class HomeView extends StatelessWidget {
                   builder: (context, value, child) {
                     return GridView.builder(
                       physics: const BouncingScrollPhysics(),
-                      itemCount: 6,
+                      itemCount: value.turfDetails.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisSpacing: 20,
@@ -153,9 +166,16 @@ class HomeView extends StatelessWidget {
                             (MediaQuery.of(context).size.height / 1.2),
                       ),
                       itemBuilder: (context, index) {
-                        return const TurfContainer(
-                          turfName: "Jawans Arena",
+                        final newTurf = value.turfDetails[index];
+                        return TurfContainer(
+                          turfName: newTurf.turfName,
+                          turfPlace: newTurf.turfPlace,
                           visible: false,
+                          turfImage: newTurf.turfImages.turfImages1!,
+                          cardOnTap: () {
+                            Navigator.pushNamed(context, DetailsView.id);
+                          },
+                          bookOnclick: () {},
                         );
                       },
                     );

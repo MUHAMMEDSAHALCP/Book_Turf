@@ -2,13 +2,18 @@ class HomeTurfModel {
   HomeTurfModel({
     this.status,
     this.data,
+    this.message,
+    this.error,
   });
   bool? status;
   List<Datum>? data;
+  bool? error;
+  String? message;
 
   factory HomeTurfModel.fromJson(Map<String, dynamic> json) => HomeTurfModel(
         status: json["status"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x)))
+            .toList(),
       );
 }
 
