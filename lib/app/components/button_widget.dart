@@ -31,7 +31,8 @@ class MaterialButtonWidget extends StatelessWidget {
           text,
           style: textStyle.copyWith(
             color: textColor,
-            fontSize: 16,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
