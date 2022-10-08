@@ -1,5 +1,5 @@
-class OtpModel {
-  OtpModel({
+class EmailOtpModel {
+  EmailOtpModel({
     this.userOtp,
     this.id,
   });
@@ -13,17 +13,19 @@ class OtpModel {
       };
 }
 
-class OtpModelResponse {
-  OtpModelResponse({
-    required this.status,
-    required this.message,
+class EmailOtpModelResponse {
+  EmailOtpModelResponse({
+    this.status,
+    this.message,
+    this.error,
   });
 
-  bool status;
-  String message;
+  bool? status;
+  String? message;
+  bool? error;
 
-  factory OtpModelResponse.fromJson(Map<String, dynamic> json) =>
-      OtpModelResponse(
+  factory EmailOtpModelResponse.fromJson(Map<String, dynamic> json) =>
+      EmailOtpModelResponse(
         status: json["status"],
         message: json["message"],
       );

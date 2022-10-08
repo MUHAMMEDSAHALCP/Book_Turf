@@ -9,29 +9,30 @@ import 'package:provider/provider.dart';
 class OtpVerificationView extends StatelessWidget {
   static String id = "otp_view";
 
-  const OtpVerificationView({Key? key, this.newId}) : super(key: key);
-
-  final String? newId;
+  const OtpVerificationView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    SignUpViewModel signUpViewModel = context.read<SignUpViewModel>();
     return SafeArea(
       child: Scaffold(
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text(
+            children: [
+              const Text(
                 "OTP VERIFICATION",
                 style: textStyle,
               ),
               height5,
-              Text("We sent your code to  "),
+              Text("We sent your code to ${signUpViewModel.email}"),
               height50,
-              OtpForm(),
+              const OtpForm(),
               height50,
-              Text(
+              const Text(
                 "Resend OTP cod",
                 style: TextStyle(
                   decoration: TextDecoration.underline,
@@ -147,7 +148,7 @@ class OtpForm extends StatelessWidget {
           textColor: whiteColor,
           onClick: () {
             otpViewModel.verifyOtp(context,
-                Provider.of<SignUpViewModel>(context, listen: false ).newID!);
+                Provider.of<SignUpViewModel>(context, listen: false).newID!);
           },
         ),
       ],
