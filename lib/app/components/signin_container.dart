@@ -9,7 +9,8 @@ class SignInContainer extends StatelessWidget {
   final String signUpSignInText;
   final Function() signUpSignInOnClick;
   final Function() buttonOnClick;
-  final Function() googleButtonOnClick;
+  final Function() googleOnClick;
+  final Function() phoneOnClick;
 
   const SignInContainer({
     Key? key,
@@ -18,7 +19,8 @@ class SignInContainer extends StatelessWidget {
     required this.signUpSignInText,
     required this.signUpSignInOnClick,
     required this.buttonOnClick,
-    required this.googleButtonOnClick,
+    required this.googleOnClick,
+    required this.phoneOnClick,
   }) : super(key: key);
 
   @override
@@ -26,7 +28,7 @@ class SignInContainer extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       width: double.infinity,
-      height: size.height * 0.37,
+      height: size.height * 0.43,
       decoration: const BoxDecoration(
         color: primaryColor,
         borderRadius: BorderRadius.only(
@@ -35,7 +37,7 @@ class SignInContainer extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
         child: Column(
           children: [
             MaterialButtonWidget(
@@ -54,20 +56,19 @@ class SignInContainer extends StatelessWidget {
                     signUpSignInText,
                     style: textFormTextStyle.copyWith(
                       color: whiteColor,
-                      fontWeight: FontWeight.bold,
-                    ),
+                      fontWeight: FontWeight.bold,                    ),
                   ),
                 ),
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20, bottom: 20),
+              padding: const EdgeInsets.only(top: 25, bottom: 25),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                     height: 1,
-                    width: size.width / 2.8,
+                    width: size.width / 3,
                     color: greyColor,
                   ),
                   width10,
@@ -75,31 +76,41 @@ class SignInContainer extends StatelessWidget {
                   width10,
                   Container(
                     height: 1,
-                    width: size.width / 2.8,
+                    width: size.width / 3,
                     color: greyColor,
                   ),
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                CircleAvatar(
-                  backgroundColor: whiteColor,
-                  radius: 20,
-                  backgroundImage: AssetImage("assets/images/google.png"),
-                ),
-                width10,
-                CircleAvatar(
-                  child: CircleAvatar(
-                    backgroundColor: whiteColor,
-                    radius: 17,
-                    backgroundImage: AssetImage(
-                      "assets/images/phone.jpg",
+            Flexible(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: googleOnClick,
+                    child: const CircleAvatar(
+                      backgroundColor: whiteColor,
+                      radius: 25,
+                      backgroundImage: AssetImage("assets/images/google.png"),
                     ),
                   ),
-                ),
-              ],
+                  width10,
+                  width10,
+                  GestureDetector(
+                    onTap: phoneOnClick,
+                    child: const CircleAvatar(
+                      radius: 25,
+                      child: CircleAvatar(
+                        backgroundColor: whiteColor,
+                        radius: 21,
+                        backgroundImage: AssetImage(
+                          "assets/images/phone.jpg",
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
