@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:book_turf/app/components/snackbar.dart';
 import 'package:book_turf/app/modules/bottom_navigation/view/bottom_nav_bar.dart';
 import 'package:book_turf/app/modules/email_otp/model/otp_verification_model.dart';
@@ -24,7 +26,10 @@ class OtpViewModel extends ChangeNotifier {
     );
 
     EmailOtpModelResponse? result = await EmailOtpApi().emailOtpApi(newdata);
+
     if (result != null) {
+      log("token: ${result.token}");
+      log("token: ${result.refreshToken}");
       if (result.status == true) {
         final SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:book_turf/app/components/button_widget.dart';
 import 'package:book_turf/app/modules/email_otp/view_model/otp_view_model.dart';
 import 'package:book_turf/app/modules/sign_up/view_model/signup_view_model.dart';
@@ -149,6 +151,9 @@ class OtpForm extends StatelessWidget {
           onClick: () {
             otpViewModel.verifyOtp(context,
                 Provider.of<SignUpViewModel>(context, listen: false).newID!);
+            String id =
+                Provider.of<SignUpViewModel>(context, listen: false).newID!;
+            log("id:$id");
           },
         ),
       ],
