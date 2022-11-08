@@ -25,51 +25,74 @@ class TurfContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: cardOnTap,
-      child: Container(
-        decoration: boxDecoration.copyWith(
-          color: cardColor,
-          borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(100),
-            topLeft: Radius.circular(100),
-            bottomRight: Radius.circular(50),
-            bottomLeft: Radius.circular(0),
+      child: Card(
+        elevation: 2,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+          topRight: Radius.circular(100),
+          topLeft: Radius.circular(100),
+          bottomRight: Radius.circular(50),
+        )),
+        child: Container(
+          decoration: boxDecoration.copyWith(
+            color: cardColor,
+            borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(100),
+              topLeft: Radius.circular(100),
+              bottomRight: Radius.circular(50),
+            ),
           ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CircleAvatar(
-                radius: 70,
-                backgroundImage: NetworkImage(turfImage),
-              ),
-              height10,
-              Text(
-                turfName,
-                textAlign: TextAlign.center,
-                style: textStyle.copyWith(fontSize: 16),
-                maxLines: 1,
-              ),
-              height5,
-              Text(
-                turfPlace,
-                style: textStyle.copyWith(fontSize: 14, color: greyColor),
-                maxLines: 1,
-              ),
-              height5,
-              height10,
-              Visibility(
-                visible: visible,
-                child: MaterialButtonWidget(
-                  height: 35,
-                  text: "Book",
-                  color: secondaryColor,
-                  textColor: whiteColor,
-                  onClick: bookOnclick,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            child: Column(
+              children: [
+                CircleAvatar(
+                  backgroundColor: secondaryColor,
+                  radius: 55,
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: NetworkImage(turfImage),
+                  ),
                 ),
-              ),
-            ],
+                height10,
+                Column(
+                  children: [
+                    FittedBox(
+                      child: Text(
+                        turfName,
+                        textAlign: TextAlign.center,
+                        style: textStyle.copyWith(fontSize: 16),
+                      ),
+                    ),
+                    height5,
+                    Text(
+                      turfPlace,
+                      style: textStyle.copyWith(fontSize: 14, color: greyColor),
+                      maxLines: 1,
+                    ),
+                  ],
+                ),
+                height5,
+                height10,
+                Visibility(
+                  visible: visible,
+                  child: MaterialButtonWidget(
+                    isLoading: Text(
+                      "Book",
+                      style: textStyle.copyWith(
+                        color: whiteColor,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    height: 35,
+                    color: secondaryColor,
+                    textColor: whiteColor,
+                    onClick: bookOnclick,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
