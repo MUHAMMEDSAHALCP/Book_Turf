@@ -4,23 +4,23 @@ import 'package:book_turf/app/utilities/styles.dart';
 import 'package:flutter/material.dart';
 
 class SignInContainer extends StatelessWidget {
-  final String buttonText;
   final String googleButtonText;
   final String signUpSignInText;
   final Function() signUpSignInOnClick;
   final Function() buttonOnClick;
   final Function() googleOnClick;
   final Function() phoneOnClick;
+  final Widget? isLoading;
 
   const SignInContainer({
     Key? key,
-    required this.buttonText,
     required this.googleButtonText,
     required this.signUpSignInText,
     required this.signUpSignInOnClick,
     required this.buttonOnClick,
     required this.googleOnClick,
     required this.phoneOnClick,
+    this.isLoading,
   }) : super(key: key);
 
   @override
@@ -28,7 +28,7 @@ class SignInContainer extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       width: double.infinity,
-      height: size.height * 0.43,
+      height: size.height / 2.2,
       decoration: const BoxDecoration(
         color: primaryColor,
         borderRadius: BorderRadius.only(
@@ -41,8 +41,8 @@ class SignInContainer extends StatelessWidget {
         child: Column(
           children: [
             MaterialButtonWidget(
+              isLoading: isLoading,
               color: secondaryColor,
-              text: buttonText,
               textColor: whiteColor,
               onClick: buttonOnClick,
             ),
@@ -52,11 +52,14 @@ class SignInContainer extends StatelessWidget {
                 const Text("Already have an account?"),
                 TextButton(
                   onPressed: signUpSignInOnClick,
-                  child: Text(
-                    signUpSignInText,
-                    style: textFormTextStyle.copyWith(
-                      color: whiteColor,
-                      fontWeight: FontWeight.bold,                    ),
+                  child: FittedBox(
+                    child: Text(
+                      signUpSignInText,
+                      style: textFormTextStyle.copyWith(
+                        color: whiteColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               ],
