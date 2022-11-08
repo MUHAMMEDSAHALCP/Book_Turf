@@ -40,7 +40,7 @@ class Skelton extends StatelessWidget {
       width: width,
       padding: const EdgeInsets.all(defaultPadding / 2),
       decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.05),
+          color: Colors.black.withOpacity(0.08),
           borderRadius:
               const BorderRadius.all(Radius.circular(defaultPadding))),
     );
@@ -58,7 +58,7 @@ class CircleSkelton extends StatelessWidget {
       height: size,
       width: size,
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor.withOpacity(0.1),
+        color: Theme.of(context).primaryColor.withOpacity(0.15),
         shape: BoxShape.circle,
       ),
     );
