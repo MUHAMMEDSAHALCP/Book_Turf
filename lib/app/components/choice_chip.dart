@@ -6,6 +6,8 @@ class ChoiceChipWidget extends StatelessWidget {
   final TextStyle textStyle;
   final bool selected;
   final Function(bool) onClick;
+  final double? height;
+  final double width;
 
   const ChoiceChipWidget({
     Key? key,
@@ -13,24 +15,28 @@ class ChoiceChipWidget extends StatelessWidget {
     required this.textStyle,
     required this.onClick,
     required this.selected,
+    this.height,
+    required this.width,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return ChoiceChip(
-      backgroundColor: secondaryColor,
+      backgroundColor: primaryColor,
       label: SizedBox(
-        width: size.width / 10,
-        height: size.height / 20,
+        width: width,
+        height: height,
         child: Center(
-          child: Text(
-            text,
-            style: textStyle,
+          child: FittedBox(
+            child: Text(
+              text,
+              style: textStyle.copyWith(fontSize: 15),
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ),
       ),
-      selectedColor: primaryColor,
+      selectedColor: secondaryColor,
       onSelected: onClick,
       selected: selected,
     );
