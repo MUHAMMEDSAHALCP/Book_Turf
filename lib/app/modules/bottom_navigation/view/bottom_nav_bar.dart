@@ -12,7 +12,8 @@ class BottomNavView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bottomProvider = context.watch<BottomNavProvider>();
+    BottomNavProvider bottomProvider = context.watch<BottomNavProvider>();
+
     return Scaffold(
       body: bottomProvider.screens[bottomProvider.currentIndex],
       bottomNavigationBar: ClipRRect(
@@ -29,7 +30,7 @@ class BottomNavView extends StatelessWidget {
           showUnselectedLabels: false,
           currentIndex: bottomProvider.currentIndex,
           onTap: (newIndex) {
-            bottomProvider.currentIndex = newIndex;
+            bottomProvider.currentIndexState(newIndex);
           },
           items: const [
             BottomNavigationBarItem(
