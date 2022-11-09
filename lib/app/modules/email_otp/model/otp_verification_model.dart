@@ -19,20 +19,19 @@ class EmailOtpModelResponse {
     this.message,
     this.token,
     this.refreshToken,
-    
+    this.error,
   });
-
+  bool? error;
   bool? status;
   String? token;
   String? refreshToken;
   String? message;
- 
-
   factory EmailOtpModelResponse.fromJson(Map<String, dynamic> json) =>
       EmailOtpModelResponse(
         status: json["status"],
         message: json["message"],
         token: json["token"],
         refreshToken: json["refreshToken"],
+        error: json["error"] ?? true,
       );
 }

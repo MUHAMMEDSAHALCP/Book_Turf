@@ -32,7 +32,7 @@ class CustomAppBar extends StatelessWidget {
           visible: visible,
           child: IconButton(
             onPressed: favouriteOnClick,
-            icon: const Icon(Icons.favorite),
+            icon: const Icon(Icons.favorite_border),
           ),
         ),
       ],

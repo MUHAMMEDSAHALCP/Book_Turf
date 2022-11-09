@@ -6,9 +6,7 @@ class DioService {
     return await Dio().post(url, data: value).then((value) => value);
   }
 
-  static Future<dynamic> getMethod() async {
-    return await Dio()
-        .get(" http://localhost:3000/user/allTurf")
-        .then((value) => value);
+  static Future<dynamic> getMethod({required String url}) async {
+    return await Dio().get(url).then((value) => value);
   }
 }

@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:book_turf/app/components/button_widget.dart';
 import 'package:book_turf/app/modules/email_otp/view_model/otp_view_model.dart';
 import 'package:book_turf/app/modules/sign_up/view_model/signup_view_model.dart';
 import 'package:book_turf/app/utilities/colors.dart';
 import 'package:book_turf/app/utilities/styles.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,12 +29,14 @@ class OtpVerificationView extends StatelessWidget {
                 style: textStyle,
               ),
               height5,
-              Text("We sent your code to ${signUpViewModel.email}"),
+              FittedBox(
+                child: Text("We sent your code to ${signUpViewModel.email}"),
+              ),
               height50,
               const OtpForm(),
               height50,
               const Text(
-                "Resend OTP cod",
+                "Resend OTP code",
                 style: TextStyle(
                   decoration: TextDecoration.underline,
                 ),
@@ -85,75 +86,91 @@ class OtpForm extends StatelessWidget {
 
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(
-              width: 60,
-              child: TextFormField(
-                controller: otpViewModel.one,
-                autofocus: true,
-                obscureText: true,
-                keyboardType: TextInputType.number,
-                style: const TextStyle(
-                  fontSize: 24,
+        FittedBox(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: 60,
+                child: TextFormField(
+                  controller: otpViewModel.one,
+                  autofocus: true,
+                  obscureText: true,
+                  keyboardType: TextInputType.number,
+                  style: const TextStyle(
+                    fontSize: 24,
+                  ),
+                  textAlign: TextAlign.center,
+                  decoration: otpInputDecoration,
                 ),
-                textAlign: TextAlign.center,
-                decoration: otpInputDecoration,
               ),
-            ),
-            SizedBox(
-              width: 60,
-              child: TextFormField(
-                controller: otpViewModel.two,
-                obscureText: true,
-                keyboardType: TextInputType.number,
-                style: const TextStyle(
-                  fontSize: 24,
+              width5,
+              SizedBox(
+                width: 60,
+                child: TextFormField(
+                  controller: otpViewModel.two,
+                  obscureText: true,
+                  keyboardType: TextInputType.number,
+                  style: const TextStyle(
+                    fontSize: 24,
+                  ),
+                  textAlign: TextAlign.center,
+                  decoration: otpInputDecoration,
                 ),
-                textAlign: TextAlign.center,
-                decoration: otpInputDecoration,
               ),
-            ),
-            SizedBox(
-              width: 60,
-              child: TextFormField(
-                controller: otpViewModel.three,
-                obscureText: true,
-                keyboardType: TextInputType.number,
-                style: const TextStyle(
-                  fontSize: 24,
+              width5,
+              SizedBox(
+                width: 60,
+                child: TextFormField(
+                  controller: otpViewModel.three,
+                  obscureText: true,
+                  keyboardType: TextInputType.number,
+                  style: const TextStyle(
+                    fontSize: 24,
+                  ),
+                  textAlign: TextAlign.center,
+                  decoration: otpInputDecoration,
                 ),
-                textAlign: TextAlign.center,
-                decoration: otpInputDecoration,
               ),
-            ),
-            SizedBox(
-              width: 60,
-              child: TextFormField(
-                controller: otpViewModel.four,
-                obscureText: true,
-                keyboardType: TextInputType.number,
-                style: const TextStyle(
-                  fontSize: 24,
+              width5,
+              SizedBox(
+                width: 60,
+                child: TextFormField(
+                  controller: otpViewModel.four,
+                  obscureText: true,
+                  keyboardType: TextInputType.number,
+                  style: const TextStyle(
+                    fontSize: 24,
+                  ),
+                  textAlign: TextAlign.center,
+                  decoration: otpInputDecoration,
                 ),
-                textAlign: TextAlign.center,
-                decoration: otpInputDecoration,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         height50,
         MaterialButtonWidget(
-          text: "Continue",
+          isLoading: context.watch<OtpViewModel>().isLoading == true
+              ? const CupertinoActivityIndicator(
+                  radius: 15,
+                  color: whiteColor,
+                )
+              : Text(
+                  "Continue",
+                  style: textStyle.copyWith(
+                    color: whiteColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
           color: secondaryColor,
           textColor: whiteColor,
           onClick: () {
-            otpViewModel.verifyOtp(context,
-                Provider.of<SignUpViewModel>(context, listen: false).newID!);
-            String id =
-                Provider.of<SignUpViewModel>(context, listen: false).newID!;
-            log("id:$id");
+            otpViewModel.verifyOtp(
+              context,
+              Provider.of<SignUpViewModel>(context, listen: false).newID,
+            );
           },
         ),
       ],

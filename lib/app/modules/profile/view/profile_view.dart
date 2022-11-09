@@ -1,7 +1,12 @@
+import 'package:book_turf/app/modules/profile/components/my_favourite/view/my_favourite.dart';
+import 'package:book_turf/app/modules/profile/components/my_favourite/view_model/favourite_view_model.dart';
+import 'package:book_turf/app/modules/profile/widgets/signup_pop_up.dart';
 import 'package:book_turf/app/modules/profile/widgets/settings_widget.dart';
+import 'package:book_turf/app/routes/routes.dart';
 import 'package:book_turf/app/utilities/colors.dart';
 import 'package:book_turf/app/utilities/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileView extends StatelessWidget {
   static String id = "acount_view";
@@ -11,6 +16,7 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: backgroundcolor,
         body: Padding(
           padding: const EdgeInsets.only(top: 20, left: 10),
           child: Column(
@@ -47,25 +53,28 @@ class ProfileView extends StatelessWidget {
                         ),
                         width10,
                         width5,
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "MUHAMMED SAHAL CP",
-                              style: textStyle.copyWith(
-                                color: blackColor,
-                                fontSize: 18,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "MUHAMMED SAHAL CP",
+                                style: textStyle.copyWith(
+                                  color: blackColor,
+                                  fontSize: 18,
+                                ),
+                                maxLines: 1,
                               ),
-                            ),
-                            height5,
-                            Text(
-                              "9207870789",
-                              style: textStyle.copyWith(
-                                color: blackColor,
-                                fontSize: 18,
+                              height5,
+                              Text(
+                                "9207870789",
+                                style: textStyle.copyWith(
+                                  color: blackColor,
+                                  fontSize: 18,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -79,10 +88,10 @@ class ProfileView extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        ReusableSettingContainer(
-                            title: "Notification",
-                            onClick: () {},
-                            icon: Icons.notifications),
+                        // ReusableSettingContainer(
+                        //     title: "Notification",
+                        //     onClick: () {},
+                        //     icon: Icons.notifications),
                         ReusableSettingContainer(
                           title: "My Booking",
                           onClick: () {},
@@ -90,12 +99,18 @@ class ProfileView extends StatelessWidget {
                         ),
                         ReusableSettingContainer(
                             title: "My Favourites",
-                            onClick: () {},
+                            onClick: () {
+                              // Navigator.pushNamed(context, MyFavourites.id);
+                              context
+                                  .read<FavouriteViewModel>()
+                                  .fetchData(context);
+                              Navigations.push(const MyFavourites());
+                            },
                             icon: Icons.favorite),
-                        ReusableSettingContainer(
-                            title: "Invate a friend",
-                            onClick: () async {},
-                            icon: Icons.cleaning_services),
+                        // ReusableSettingContainer(
+                        //     title: "Invate a friend",
+                        //     onClick: () async {},
+                        //     icon: Icons.cleaning_services),
                         ReusableSettingContainer(
                           title: "Rate us",
                           onClick: () {},
@@ -107,7 +122,9 @@ class ProfileView extends StatelessWidget {
                             icon: Icons.cancel),
                         ReusableSettingContainer(
                             title: "Sign out",
-                            onClick: () {},
+                            onClick: () {
+                              signUpPopUp(context);
+                            },
                             icon: Icons.logout),
                       ],
                     ),

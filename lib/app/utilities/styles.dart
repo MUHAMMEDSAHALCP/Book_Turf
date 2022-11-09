@@ -20,6 +20,13 @@ final otpInputDecoration = InputDecoration(
   enabledBorder: outlineInputBorder(),
   focusedBorder: outlineInputBorder(),
 );
+const inputDecoration = InputDecoration(
+  contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+  enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: blackColor, width: 1.0),
+  ),
+  border: OutlineInputBorder(),
+);
 
 OutlineInputBorder outlineInputBorder() => OutlineInputBorder(
       borderRadius: BorderRadius.circular(60),
@@ -32,3 +39,4 @@ const height30 = SizedBox(height: 30);
 const height50 = SizedBox(height: 50);
 const width5 = SizedBox(width: 5);
 const width10 = SizedBox(width: 10);
+const defaultPadding = 16.0;

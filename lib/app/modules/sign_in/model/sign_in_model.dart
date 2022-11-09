@@ -15,18 +15,24 @@ class SigninModel {
 
 class SignInResponse {
   SignInResponse({
-    required this.status,
-    required this.message,
+    this.status,
+    this.message,
     this.token,
+    this.refreshToken,
+    this.error,
+    this.id,
   });
-
-  bool status;
-  String message;
+  String? id;
+  bool? status;
+  String? message;
   String? token;
+  String? refreshToken;
+  bool? error;
 
   factory SignInResponse.fromJson(Map<String, dynamic> json) => SignInResponse(
-        status: json["status"],
-        message: json["message"],
-        token: json["token"] ?? "No token",
-      );
+      status: json["status"],
+      message: json["message"],
+      token: json["token"] ?? "No token",
+      refreshToken: json["refreshToken"],
+      id: json["_id"]);
 }

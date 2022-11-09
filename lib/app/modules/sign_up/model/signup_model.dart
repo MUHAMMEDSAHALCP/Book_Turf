@@ -1,12 +1,11 @@
 class SignUpModel {
   SignUpModel({
-    required this.userMail,
-    required this.userPassword,
+    this.userMail,
+    this.userPassword,
   });
 
-  String userMail;
-  String userPassword;
-
+  String? userMail;
+  String? userPassword;
   Map<String, dynamic> toJson() => {
         "user_mail": userMail,
         "user_password": userPassword,
@@ -15,15 +14,20 @@ class SignUpModel {
 
 class SignUpResponse {
   SignUpResponse({
-    required this.status,
-    required this.id,
+    this.status,
+    this.id,
+    this.message,
+    this.error,
   });
-
-  bool status;
-  String id;
+  bool? error;
+  bool? status;
+  String? id;
+  String? message;
 
   factory SignUpResponse.fromJson(Map<String, dynamic> json) => SignUpResponse(
         status: json["status"],
         id: json["id"],
+        message: json["message"],
+        error: json["error"] ?? true,
       );
 }

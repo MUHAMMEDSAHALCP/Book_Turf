@@ -1,12 +1,15 @@
-import 'package:book_turf/app/components/snackbar.dart';
+import 'package:book_turf/app/components/error_dialogue_widget.dart';
 import 'package:book_turf/app/modules/home/model/home_model.dart';
-import 'package:book_turf/app/modules/home/service/home_api_service.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:book_turf/app/modules/home/services/home_api_service.dart';
+import 'package:book_turf/app/routes/routes.dart';
+import 'package:flutter/material.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  String _type = "7's";
+  bool isLoading = false;
+  String _type = "Football";
   bool isClicked = false;
-  List<Datum> turfDetails = [];
+  List<NearestTurfDetails> turfDetails = [];
+  TurfNearestData? turfModel;
   get type => _type;
 
   setState(value) {
@@ -15,13 +18,19 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   void getTurfDetails(context) async {
-    HomeTurfModel? homeTurfModel = await HomeApiService().getTurfdata();
-    if (homeTurfModel!.status == true) {
+    isLoading = true;
+    turfModel = await HomeApiService().getHomeTurfdata();
+    if (turfModel!.error == true) {
       turfDetails.clear();
-      turfDetails.addAll(homeTurfModel.data!);
+      turfDetails.addAll(turfModel!.data!);
+      isLoading = false;
       notifyListeners();
     } else {
-      SnackBarWidget.chekFormFill(context, homeTurfModel.message);
+      Navigations.pushRemoveUntil(
+        ErrorDialogueWidget(
+          text: turfModel!.message.toString(),
+        ),
+      );
     }
   }
 }

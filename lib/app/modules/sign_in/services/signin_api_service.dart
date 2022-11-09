@@ -1,31 +1,26 @@
-import 'dart:developer';
+import 'package:book_turf/app/components/error.handler.dart';
 import 'package:book_turf/app/modules/sign_in/model/sign_in_model.dart';
-import 'package:book_turf/app/modules/sign_up/model/signup_model.dart';
-import 'package:book_turf/app/utilities/dio_service.dart';
 import 'package:book_turf/app/utilities/url.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 
 class SignInApiService {
-  signinApi(SigninModel data) async {
-    try {
-      Response response = await DioService.postMethod(
-          url: Url.baseUrl + Url.login, value: data.toJson());
-
-      if (response.statusCode == 200) {
-        SignInResponse newData = SignInResponse.fromJson(response.data);
-        if (kDebugMode) {
-          print(newData);
+  Future<SignInResponse?> signinApi(SigninModel data) async {
+    bool network = await checking();
+    if (network) {
+      Dio dio = Dio();
+      try {
+        Response response =
+            await dio.post(Url.baseUrl + Url.login, data: data.toJson());
+        if (response.statusCode! >= 200 && response.statusCode! <= 299) {
+          return SignInResponse.fromJson(response.data);
         }
-        return newData;
+      } catch (e) {
+        return SignInResponse(error: false, message: handleError(e));
       }
-    } on DioError catch (e) {
-      if (e.response!.statusCode == 401) {
-        log("SignIn error message: ${e.message}");
-        return SignUpResponse.fromJson(e.response!.data);
-      }
-    } catch (e) {
-      log("SignIn error message: $e");
+    } else {
+      return SignInResponse(
+          error: false, message: "Please check your internet !!!");
     }
+    return null;
   }
 }
